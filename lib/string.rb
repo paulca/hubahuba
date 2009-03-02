@@ -7,7 +7,7 @@ class String
     Digest::SHA1.hexdigest(self)
   end
   
-  def strip(char)
+  def strip(char = " ")
      new_str = ""
      self.each_byte do |byte|
         new_str << byte.chr unless byte.chr == char
