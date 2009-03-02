@@ -7,11 +7,28 @@ class String
     Digest::SHA1.hexdigest(self)
   end
   
-  def strip(char = " ")
-     new_str = ""
-     self.each_byte do |byte|
-        new_str << byte.chr unless byte.chr == char
-     end
-     new_str
+  alias_method :strip_old, :strip
+  def strip(char=" ")
+    return strip_old if char == nil
+    new_str = ""
+    buff = ""
+    state = :start
+    self.each_byte do |byte|
+      state = :middle if state == :start and byte.chr != char
+
+      if state == :middle and byte.chr == char
+        buff < 0
+        new_str += buff
+        buff = ""
+      end
+
+      new_str << byte.chr
+    end
+
+    new_str
   end
 end
+
+
+
+
