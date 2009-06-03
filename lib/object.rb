@@ -34,14 +34,6 @@ class Object
     end
   end
 
-  ##
-  #   @person ? @person.name : nil
-  # vs
-  #   @person.try(:name)
-  def try(method)
-    send method if respond_to? method
-  end
-
   def class_attr_accessor(*attrs)
     metaclass.send(:attr_accessor, *attrs)
   end
